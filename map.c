@@ -6,13 +6,13 @@
 /*   By: hecampbe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 23:49:57 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/05/24 01:37:02 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/05/24 02:46:17 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-char			map(char **map, int map_size)
+char			make_map(char **map, int map_size)
 {
 	int x;
 	int y;
