@@ -6,7 +6,7 @@
 /*   By: vdauverg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 09:15:45 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/05/24 01:35:31 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/05/24 02:43:51 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ t_tetrimino	*check_blocks(t_block *blocks);
 t_tetrimino	*check_piece(char *piece);
 t_tetrimino	**read_input(char *input);
 void		safe_exit();
-int			check_map(char **map, t_tetrimino **tettiminos, int max_map_value, int ti);
-char		map(char **map, int map_size);
+int			check_map(char **map, t_tetrimino **tetriminos, int max_map_value, int ti);
+char		make_map(char **map, int map_size);
 char		*place_block(char **map, int ti, unsigned char **coordinates);
 
 # endif
