@@ -6,7 +6,7 @@
 /*   By: hecampbe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:44:17 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/05/29 14:46:04 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/05/29 15:46:47 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ char		**map_increment(char **map, t_tetrimino **tetriminos, int i, int ti, int m
 	int tmp_x;
 	int tmp_y;
 
-	x = tetriminos[ti]->blocks[i - 1].x;
-	y = tetriminos[ti]->blocks[i - 1].y;
-	tmp_x = x;
-	tmp_y = y;
+	tmp_x = tetriminos[ti]->blocks[i - 1].x;
+	tmp_y = tetriminos[ti]->blocks[i - 1].y;
 	x = tetriminos[ti]->blocks[i].x;
 	y = tetriminos[ti]->blocks[i].y;
 	if (y > tmp_y)
