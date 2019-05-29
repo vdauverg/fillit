@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:22:47 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/05/29 14:04:12 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/05/29 15:33:18 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,12 @@ void	safe_exit(int fd)
 	exit(0);
 }
 
-char	**map_init(t_tetrimino **tetriminos)
+char	**map_init(t_tetrimino **tetriminos, int num)
 {
 	int		i;
 	int		j;
-	int		num;
 	char	**map;
 
-	i = 0;
-	num = 0;
-	while (tetriminos[i++])
-		num++;
 	map = (char **)malloc(sizeof(char *) * (num + 1));
 	map[num] = NULL;
 	i = 0;
@@ -50,16 +45,18 @@ char	**map_init(t_tetrimino **tetriminos)
 
 int		main(int argc, char **argv)
 {
-	int			map_size;
 	int			ti;
+	int			map_size;
 	t_tetrimino **tetriminos;
 
 	if (argc == 2)
 	{
 		tetriminos = read_input(argv[1]);
-		map_size = 4;
+		map_size = 0;
+		while (tetriminos[map_size])
+			map_size++;
 		ti = 0;
-		check_map(map_init(tetriminos), tetriminos, map_size, ti);
+		check_map(map_init(tetriminos, map_size), tetriminos, map_size, ti);
 	}
 	else
 		safe_exit(0);
