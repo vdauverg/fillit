@@ -6,35 +6,11 @@
 /*   By: hecampbe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 23:49:57 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/05/28 16:08:01 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/05/29 14:39:53 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-char			make_map(char **map, int map_size)
-{
-	int x;
-	int y;
-
-	x = 0;
-	y = 0;
-	while (map[y][x] != '\0')
-	{
-		if (x == '\0')
-		{
-			x = 0;
-			y++;
-		}
-		else
-		{
-			map[y][x] = '.';
-			x++;
-		}
-	}
-	map_size++;
-	return (map_size);
-}
 
 char			*place_block(char **map, int ti, unsigned char **coordinates)
 {

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   block_check.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hecampbe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/29 14:44:17 by hecampbe          #+#    #+#             */
+/*   Updated: 2019/05/29 14:46:04 by hecampbe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 
-char		map_increment(char **map, t_tetrimino **tetriminos, int i, int ti, int map_x, int map_y)
+char		**map_increment(char **map, t_tetrimino **tetriminos, int i, int ti, int map_x, int map_y)
 {
 	int x;
 	int y;
@@ -24,7 +36,7 @@ char		map_increment(char **map, t_tetrimino **tetriminos, int i, int ti, int map
 	return (map[map_y][map_x]);
 }
 
-char		first_block(char **map, int map_x, int map_y)
+char		**first_block(char **map, int map_x, int map_y)
 {
 	while (map[map_y][map_x] != '.')
 	{
