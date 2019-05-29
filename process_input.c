@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 15:36:09 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/05/28 21:30:51 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/05/29 13:32:21 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int			find_adjacent_blocks(t_tetrimino *tetrimino, t_block *blocks, int i)
 
 t_tetrimino	*check_blocks(t_block *blocks, int fd)
 {
-	int 		i;
-	int 		connections;
+	int			i;
+	int			connections;
 	t_tetrimino *tetrimino;
 
 	connections = 0;
@@ -73,38 +73,27 @@ t_tetrimino	*check_piece(char *piece, int fd)
 {
 	int		i;
 	int		y;
-	int 	x;
-	int 	num;
+	int		x;
+	int		num;
 	t_block *blocks;
 
 	num = 0;
-	i = 0;
+	i = -1;
 	x = 3;
-	while (piece[i])
+	while (piece[++i])
+		(piece[i] == '#' && ++num && x > i % 4) ? x = i % 4 : 0;
+	if (!(i == 16 && num == 4))
+		return (NULL);
+	blocks = (t_block *)malloc(sizeof(t_block) * 5);
+	num = 0;
+	i = -1;
+	while (piece[++i] && num < 4)
 	{
+		(!num) ? y = i / 4 : 0;
 		if (piece[i] == '#')
-		{
-			num++;
-			(x > i % 4) ? x = i % 4 : 0;
-		}
-		i++;
+			blocks[num].x = i % 4 - x;
+		if (piece[i] == '#')
+			blocks[num++].y = i / 4 - y;
 	}
-	if (i == 16 && num == 4)
-	{
-		blocks = (t_block *)malloc(sizeof(t_block) * 5);
-		num = 0;
-		i = 0;
-		while (piece[i] && num < 4)
-		{
-			(!num) ? y = i / 4 : 0;
-			if (piece[i] == '#')
-			{
-				blocks[num].x = i % 4 - x;
-				blocks[num++].y = i / 4 - y;
-			}
-			i++;
-		}
-		return (check_blocks(blocks, fd));
-	}
-	return (NULL);
+	return (check_blocks(blocks, fd));
 }
