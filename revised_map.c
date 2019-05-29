@@ -6,13 +6,13 @@
 /*   By: hecampbe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 22:41:52 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/05/29 15:11:29 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/05/29 15:34:11 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int			check_map(char **map, t_tetrimino **tetriminos, int max_map_value, int ti)
+int			check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
 {
 	unsigned char	**coordinates;
 	int				point;
@@ -26,9 +26,9 @@ int			check_map(char **map, t_tetrimino **tetriminos, int max_map_value, int ti)
 	point = 0;
 	coordinates = NULL;
 	first_block(map, map_x, map_y);
-	while (map[max_map_value][max_map_value] == '\0' && i < 4)
+	while ((max_x < mmv && map_y < mmv) && i < 4)
 	{
-		if (map[map_y][map_x] == '\0' && map_y < max_map_value)
+		if (map[map_y][map_x] == '\0' && map_y < mmv)
 		{
 			map_x = 0;
 			map_y++;
