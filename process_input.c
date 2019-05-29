@@ -6,19 +6,13 @@
 /*   By: vdauverg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 15:36:09 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/05/23 14:31:42 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/05/27 21:27:30 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void		safe_exit()
-{
-	write(1, "usage: ./fillit source_file\n", 28);
-	exit(0);
-}
-
-t_tetrimino	*check_blocks(t_block *blocks) // Check that blocks within a tetrimino connect together
+t_tetrimino	*check_blocks(t_block *blocks, int fd)
 {
 	int			i;
 	int			j;
@@ -58,7 +52,7 @@ t_tetrimino	*check_blocks(t_block *blocks) // Check that blocks within a tetrimi
 		tetrimino = NULL;
 		free(blocks);
 		free(tetrimino);
-		safe_exit();
+		safe_exit(fd);
 	}
 	tetrimino->blocks = blocks;
 	tetrimino->height /= 2;
@@ -66,7 +60,7 @@ t_tetrimino	*check_blocks(t_block *blocks) // Check that blocks within a tetrimi
 	return (tetrimino);
 }
 
-t_tetrimino	*check_piece(char *piece) // Check that four blocks are in the tetrimino
+t_tetrimino	*check_piece(char *piece, int fd)
 {
 	int		i;
 	int		y;
@@ -77,8 +71,6 @@ t_tetrimino	*check_piece(char *piece) // Check that four blocks are in the tetri
 	num = 0;
 	i = 0;
 	x = 3;
-
-	// Count blocks and check for left-most piece
 	while (piece[i])
 	{
 		if (piece[i] == '#')
@@ -88,8 +80,6 @@ t_tetrimino	*check_piece(char *piece) // Check that four blocks are in the tetri
 		}
 		i++;
 	}
-
-	// If 4 blocks, malloc array of t_blocks and set x & y values
 	if (i == 16 && num == 4)
 	{
 		blocks = (t_block *)malloc(sizeof(t_block) * 5);
@@ -97,72 +87,76 @@ t_tetrimino	*check_piece(char *piece) // Check that four blocks are in the tetri
 		i = 0;
 		while (piece[i] && num < 4)
 		{
-			(!num) ? y = i / 4 : 0; // Check for top-most piece
+			(!num) ? y = i / 4 : 0;
 			if (piece[i] == '#')
 			{
-				blocks[num].x = i % 4 - x; // Set x to left-most position possible
-				blocks[num++].y = i / 4 - y; // Set y to up-most position possible
+				blocks[num].x = i % 4 - x;
+				blocks[num++].y = i / 4 - y;
 			}
 			i++;
 		}
-		return (check_blocks(blocks)); // Check the blocks then return the tetrimino
+		return (check_blocks(blocks, fd));
 	}
-	return (NULL); // Otherwise return nothing
+	return (NULL);
+}
+
+int			read_piece(int fd, t_tetrimino **tmp)
+{
+	int		i;
+	int		len;
+	char	*line;
+	char	*piece;
+
+	piece = "";
+	i = 0;
+	while (get_next_line(fd, &line) > 0)
+	{
+		(*line) ? len = ft_strlen(line) : 0;
+		if (*line && len == 4)
+			piece = ft_strjoin(piece, line);
+		else if (len == 4 && i == 4)
+		{
+			ft_strdel(&line);
+			*tmp = check_piece(piece, fd);
+			return (1);
+		}
+		else
+			return (0);
+		(line) ? ft_strdel(&line) : 0;
+		i++;
+	}
+	return (2);
 }
 
 t_tetrimino	**read_input(char *input)
 {
 	int			fd;
-	int			i;
 	int			num;
-	char		*line;
-	char		*piece;
+	int			check;
+	t_tetrimino	*tmp;
 	t_tetrimino	**tetriminos;
 
-	fd = open(input, O_RDONLY);
+	((fd = open(input, O_RDONLY)) <= 0) ? safe_exit(0) : 0;
 	tetriminos = (t_tetrimino **)malloc(sizeof(t_tetrimino *) * 27);
-	tetriminos[26] = NULL;
-	piece = "";
-
-	i = 0;
 	num = 0;
-	while (get_next_line(fd, &line) > 0) // Read line by line until EOF or error
+	tmp = NULL;
+	while ((check = read_piece(fd, &tmp)) != 2)
 	{
-		// If *line and *line is 4 long add line to piece
-		if (*line && ft_strlen(line) == 4)
-				piece = ft_strjoin(piece, line);
-
-		// Else if 4 lines read and piece is valid (function)
-		else if (i == 4 && (tetriminos[num] = check_piece(piece))) 
-		{
-			// Increment piece index, reset i and clear piece
-			num++;
-			i = -1;
-			ft_strclr(piece);
-		}
-
-		// Else (not 4 lines read / tetrimino not valid)
+		if (check)
+			tetriminos[num] = tmp;
 		else
 		{
-			// Delete line, free tetriminos and return NULL
-			(line) ? ft_strdel(&line) : 0;
-			while (num >= 0)
-				(tetriminos[num]) ? free(tetriminos[num--]) : 0;
+			(tmp) ? free(tmp) : 0;
+			while (--num >= 0)
+				free(tetriminos[num]) ;
 			free(tetriminos);
-			close(fd);
-			safe_exit();
+			safe_exit(fd);
 		}
-
-		// Free line, increment line number of tetrimino
-		(line) ? ft_strdel(&line) : 0;
-		i++;
+		tmp = NULL;
+		num++;
 	}
-
 	close(fd);
-
-	// Set remaining tetriminos to NULL
 	while (num < 26)
 		tetriminos[num++] = NULL;
-
 	return (tetriminos);
 }

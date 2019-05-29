@@ -6,11 +6,18 @@
 /*   By: vdauverg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:22:47 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/05/23 18:55:31 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/05/27 21:15:04 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+void	safe_exit(int fd)
+{
+	(fd) ? close(fd) : 0;
+	ft_putstr("usage: ./fillit source_file\n");
+	exit(0);
+}
 
 int	main(int argc, char **argv)
 {
@@ -54,7 +61,7 @@ int	main(int argc, char **argv)
 		}
 	}
 	else
-		safe_exit();
+		safe_exit(0);
 
 	return(0);
 }

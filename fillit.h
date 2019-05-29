@@ -6,7 +6,7 @@
 /*   By: vdauverg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 09:15:45 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/05/23 00:37:53 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/05/27 21:17:00 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ typedef struct	s_tetrimino
 }				t_tetrimino;
 
 //	Process Input
-t_tetrimino	*check_blocks(t_block *blocks);
-t_tetrimino	*check_piece(char *piece);
+int			read_piece(int fd, t_tetrimino **tmp);
+t_tetrimino	*check_blocks(t_block *blocks, int fd);
+t_tetrimino	*check_piece(char *piece, int fd);
 t_tetrimino	**read_input(char *input);
-void		safe_exit();
 
+//	Main
+void		safe_exit(int fd);
 # endif
