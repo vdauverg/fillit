@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vdauverg <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:22:47 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/05/27 21:15:04 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/05/28 21:29:37 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	safe_exit(int fd)
 	exit(0);
 }
 
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-	t_tetrimino	**tetriminos;
+	t_tetrimino **tetriminos;
 	int			i;
 	int			j;
 	int			k;
@@ -63,5 +63,5 @@ int	main(int argc, char **argv)
 	else
 		safe_exit(0);
 
-	return(0);
+	return (0);
 }

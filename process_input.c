@@ -3,22 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   process_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vdauverg <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 15:36:09 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/05/27 21:27:30 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/05/28 21:30:51 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
+int			find_adjacent_blocks(t_tetrimino *tetrimino, t_block *blocks, int i)
+{
+	int	j;
+	int	diff;
+	int	connections;
+
+	j = 0;
+	connections = 0;
+	while (j < 4)
+	{
+		(i == j) ? j++ : 0;
+		diff = blocks[i].y - blocks[j].y;
+		if (blocks[i].x == blocks[j].x && (diff == 1 || diff == -1))
+		{
+			tetrimino->height++;
+			connections++;
+		}
+		diff = blocks[i].x - blocks[j].x;
+		if (blocks[i].y == blocks[j].y && (diff == 1 || diff == -1))
+		{
+			tetrimino->width++;
+			connections++;
+		}
+		j++;
+	}
+	return (connections);
+}
+
 t_tetrimino	*check_blocks(t_block *blocks, int fd)
 {
-	int			i;
-	int			j;
-	int			diff;
-	int			connections;
-	t_tetrimino	*tetrimino;
+	int 		i;
+	int 		connections;
+	t_tetrimino *tetrimino;
 
 	connections = 0;
 	i = 0;
@@ -27,24 +53,7 @@ t_tetrimino	*check_blocks(t_block *blocks, int fd)
 	tetrimino = (t_tetrimino *)malloc(sizeof(t_tetrimino));
 	while (i < 4)
 	{
-		j = 0;
-		while (j < 4)
-		{
-			(i == j) ? j++ : 0;
-			diff = blocks[i].y - blocks[j].y;
-			if (blocks[i].x == blocks[j].x && (diff == 1 || diff == -1))
-			{
-				tetrimino->height++;
-				connections++;
-			}
-			diff = blocks[i].x - blocks[j].x;
-			if (blocks[i].y == blocks[j].y && (diff == 1 || diff == -1))
-			{
-				tetrimino->width++;
-				connections++;
-			}
-			j++;
-		}
+		connections += find_adjacent_blocks(tetrimino, blocks, i);
 		i++;
 	}
 	if (connections < 6)
@@ -64,9 +73,9 @@ t_tetrimino	*check_piece(char *piece, int fd)
 {
 	int		i;
 	int		y;
-	int		x;
-	int		num;
-	t_block	*blocks;
+	int 	x;
+	int 	num;
+	t_block *blocks;
 
 	num = 0;
 	i = 0;
@@ -98,65 +107,4 @@ t_tetrimino	*check_piece(char *piece, int fd)
 		return (check_blocks(blocks, fd));
 	}
 	return (NULL);
-}
-
-int			read_piece(int fd, t_tetrimino **tmp)
-{
-	int		i;
-	int		len;
-	char	*line;
-	char	*piece;
-
-	piece = "";
-	i = 0;
-	while (get_next_line(fd, &line) > 0)
-	{
-		(*line) ? len = ft_strlen(line) : 0;
-		if (*line && len == 4)
-			piece = ft_strjoin(piece, line);
-		else if (len == 4 && i == 4)
-		{
-			ft_strdel(&line);
-			*tmp = check_piece(piece, fd);
-			return (1);
-		}
-		else
-			return (0);
-		(line) ? ft_strdel(&line) : 0;
-		i++;
-	}
-	return (2);
-}
-
-t_tetrimino	**read_input(char *input)
-{
-	int			fd;
-	int			num;
-	int			check;
-	t_tetrimino	*tmp;
-	t_tetrimino	**tetriminos;
-
-	((fd = open(input, O_RDONLY)) <= 0) ? safe_exit(0) : 0;
-	tetriminos = (t_tetrimino **)malloc(sizeof(t_tetrimino *) * 27);
-	num = 0;
-	tmp = NULL;
-	while ((check = read_piece(fd, &tmp)) != 2)
-	{
-		if (check)
-			tetriminos[num] = tmp;
-		else
-		{
-			(tmp) ? free(tmp) : 0;
-			while (--num >= 0)
-				free(tetriminos[num]) ;
-			free(tetriminos);
-			safe_exit(fd);
-		}
-		tmp = NULL;
-		num++;
-	}
-	close(fd);
-	while (num < 26)
-		tetriminos[num++] = NULL;
-	return (tetriminos);
 }
