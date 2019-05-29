@@ -6,7 +6,7 @@
 /*   By: hecampbe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 23:49:57 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/05/29 14:39:53 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/05/29 15:26:31 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char			*place_block(char **map, int ti, unsigned char **coordinates)
 	t_letter = t_letter + ti;
 	while (coordinates[i][point] != '\0')
 	{
-		map[coordinates[i][point]][coordinates[i][point + 1]] = t_letter;
+		map[coordinates[i][point + 1]][coordinates[i][point]] = t_letter;
 		i++;
 	}
 	return (*map);
