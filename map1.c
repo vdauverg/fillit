@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   map1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hecampbe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 04:30:11 by hecampbe          #+#    #+#             */
 /*   Updated: 2019/05/28 17:12:06 by hecampbe         ###   ########.fr       */
@@ -31,7 +31,7 @@ int				check_map(char **map, t_tetrimino **tetriminos, int max_map_value, int ti
 	coordinates = NULL;
 	x = tetriminos[ti] -> blocks[i].x;
 	y = tetriminos[ti] -> blocks[i].y;
-	while (i != 4)
+	while (i < 4)
 	{
 		if (map[max_map_value][max_map_value] == '\0')
 		{

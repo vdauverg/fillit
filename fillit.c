@@ -3,58 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vdauverg <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:22:47 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/05/23 18:55:31 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/05/29 14:04:12 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int	main(int argc, char **argv)
+void	safe_exit(int fd)
 {
-	t_tetrimino	**tetriminos;
-	int			i;
-	int			j;
-	int			k;
-	int			l;
+	(fd) ? close(fd) : 0;
+	ft_putstr("usage: ./fillit source_file\n");
+	exit(0);
+}
+
+char	**map_init(t_tetrimino **tetriminos)
+{
+	int		i;
+	int		j;
+	int		num;
+	char	**map;
+
+	i = 0;
+	num = 0;
+	while (tetriminos[i++])
+		num++;
+	map = (char **)malloc(sizeof(char *) * (num + 1));
+	map[num] = NULL;
+	i = 0;
+	while (i < num)
+	{
+		map[i] = (char *)malloc(sizeof(char) * (num + 1));
+		map[i][num] = 0;
+		j = 0;
+		while (j < num)
+		{
+			map[i][j] = '.';
+			j++;
+		}
+		i++;
+	}
+	return (map);
+}
+
+int		main(int argc, char **argv)
+{
+	int			map_size;
+	int			ti;
+	t_tetrimino **tetriminos;
 
 	if (argc == 2)
 	{
 		tetriminos = read_input(argv[1]);
-		i = 0;
-		while (tetriminos[i] && tetriminos[i]->placed != -1)
-		{
-			j = 0;
-			while (j < 4)
-			{
-				k = 0;
-				while (k < 4)
-				{
-					l = 0;
-					while (l < 4)
-					{
-						if (tetriminos[i]->blocks[l].x == k && tetriminos[i]->blocks[l].y == j)
-						{
-							write(1, "#", 1);
-							break ;
-						}
-						l++;
-					}
-					if (l == 4)
-						write(1, ".", 1);
-					k++;
-				}
-				write(1, "\n", 1);
-				j++;
-			}
-			write(1, "\n", 1);
-			i++;
-		}
+		map_size = 4;
+		ti = 0;
+		check_map(map_init(tetriminos), tetriminos, map_size, ti);
 	}
 	else
-		safe_exit();
-
-	return(0);
+		safe_exit(0);
+	return (0);
 }
