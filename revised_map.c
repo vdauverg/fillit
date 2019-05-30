@@ -6,7 +6,7 @@
 /*   By: hecampbe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 22:41:52 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/05/29 15:34:11 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/05/29 18:15:08 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ int			check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
 		else
 			return (1);
 		map_increment(map, tetriminos, i, ti, map_x, map_y);
+		//make the points equal something
+		//Move up the cooridnates point part
+		//check to make sure its empty in the map_increment
 		i++;
 		if (map[map_y][map_x] == '.')
 		{

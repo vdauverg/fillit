@@ -6,7 +6,7 @@
 /*   By: hecampbe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:44:17 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/05/29 15:46:47 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/05/29 20:50:59 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,5 @@ char		**first_block(char **map, int map_x, int map_y)
 			map_y++;
 		}
 	}
-	return (map[map_y][map_x]);
+	return (special_case(map, tetriminos, i, ti, map_x, map_y));
 }
