@@ -6,7 +6,7 @@
 /*   By: hecampbe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 22:41:52 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/05/29 18:15:08 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/05/31 02:18:36 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,37 +16,36 @@ int			check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
 {
 	unsigned char	**coordinates;
 	int				point;
-	int				map_x;
-	int				map_y;
 	int				i;
+	t_pos			points;
 
 	i = 1;
-	map_x = 0;
-	map_y = 0;
 	point = 0;
+	points.map_x = 0;
+	points.map_y = 0;
+	points.i = 0;
 	coordinates = NULL;
-	first_block(map, map_x, map_y);
-	while ((max_x < mmv && map_y < mmv) && i < 4)
+	first_block(map, tetriminos, points, ti);
+	while ((points.map_x < mmv && points.map_y < mmv) && i < 4)
 	{
-		if (map[map_y][map_x] == '\0' && map_y < mmv)
+		if (map[points.map_y][points.map_x] == '\0' && points.map_y < mmv)
 		{
-			map_x = 0;
-			map_y++;
+			points.map_x = 0;
+			points.map_y++;
 		}
 		else
 			return (1);
-		map_increment(map, tetriminos, i, ti, map_x, map_y);
+		map_increment(map, tetriminos[ti], points);
 		//make the points equal something
 		//Move up the cooridnates point part
-		//check to make sure its empty in the map_increment
 		i++;
-		if (map[map_y][map_x] == '.')
+		if (map[points.map_y][points.map_x] == '.')
 		{
-			coordinates[i][point] = map_x;
+			coordinates[i][point] = points.map_x;
 			point++;
-			coordinates[i][point] = map_y;
+			coordinates[i][point] = points.map_y;
 			point++;
-			map_x++;
+			points.map_x++;
 		}
 		else
 			return (1);
