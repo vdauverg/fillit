@@ -6,13 +6,13 @@
 /*   By: hecampbe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:44:17 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/01 03:06:29 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/06/01 03:15:32 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void		map_increment(char **map, t_tetrimino *tetriminos, t_pos points)
+void		map_increment(t_tetrimino *tetriminos, t_pos points)
 {
 	int x;
 	int y;

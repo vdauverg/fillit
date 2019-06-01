@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:22:47 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/05/31 19:33:05 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/06/01 03:40:18 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,20 @@ int		main(int argc, char **argv)
 	}
 	else
 		safe_exit(0);
+	//ft_putstrx2(map);
 	return (0);
+}
+
+void	ft_putstrx2(char **map)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (map[j])
+	{
+		ft_putstr(map[j]);
+		j++;
+	}
 }
