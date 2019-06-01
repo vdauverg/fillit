@@ -3,29 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hecampbe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 23:49:57 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/01 03:03:22 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/06/01 04:32:28 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-char			*place_block(char **map, int ti, unsigned char **coordinates)
+char	**place_block(char **map, int ti, unsigned char **coordinates, t_pos points)
 {
-	int		i;
-	int		point;
 	char	t_letter;
 
-	i = 0;
-	point = 0;
 	t_letter = 'a';
 	t_letter = t_letter + ti;
-	while (coordinates[i][point] != '\0')
+	while (coordinates[points.i])
 	{
-		map[coordinates[i][point + 1]][coordinates[i][point]] = t_letter;
-		i++;
+		map[coordinates[points.i][1]][coordinates[points.i][0]] = t_letter;
+		points.i++;
 	}
-	return (*map);
+	return (map);
 }
