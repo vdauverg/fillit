@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 09:15:45 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/06/01 02:58:24 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/01 03:06:57 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_tetrimino		**read_input(char *input);
 int				check_map(char **map, t_tetrimino **tetriminos, \
 					int mmv, int ti);
 char			*place_block(char **map, int ti, unsigned char **coordinates);
-char			**map_increment(char **map, t_tetrimino *tetriminos, t_pos points);
+void			map_increment(char **map, t_tetrimino *tetriminos, t_pos points);
 char			**first_block(char **map, t_tetrimino **tetriminos, t_pos points, int ti);
 char			**special_case(char **map, t_tetrimino *tetriminos, t_pos points);
 unsigned char	**transfer(char **map, t_pos points, unsigned char **coordinates);

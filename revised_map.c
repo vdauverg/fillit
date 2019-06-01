@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 22:41:52 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/01 03:04:48 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/01 03:35:32 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int			check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
 	return (0);
 }
 
-unsigned char	**transfer(char **map, t_pos points, unsigned char **coordinates)
+unsigned char	**transfer(char **map, t_pos points,
+		unsigned char **coordinates)
 {
 	int point;
 
