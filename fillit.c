@@ -6,7 +6,11 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:22:47 by vdauverg          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/06/01 03:20:31 by vdauverg         ###   ########.fr       */
+=======
+/*   Updated: 2019/06/01 03:40:18 by hecampbe         ###   ########.fr       */
+>>>>>>> 92c3c7968336b5631091dd9bcab0e4a5cf16f679
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +23,38 @@ void	safe_exit(int fd)
 	exit(0);
 }
 
+// char	**map_init(int num)
+// {
+// 	int		i;
+// 	int		j;
+// 	char	**map;
+
+// 	num *= 2;
+// 	map = (char **)malloc(sizeof(char *) * (num + 1));
+// 	map[num] = NULL;
+// 	i = 0;
+// 	while (i < num)
+// 	{
+// 		map[i] = (char *)malloc(sizeof(char) * (num + 1));
+// 		map[i][num] = 0;
+// 		j = 0;
+// 		while (j < num)
+// 		{
+// 			map[i][j] = '.';
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (map);
+// }
+
 char	**map_init(int num)
 {
 	int		i;
 	int		j;
 	char	**map;
 
-	num *= 2;
+	num = 4;
 	map = (char **)malloc(sizeof(char *) * (num + 1));
 	map[num] = NULL;
 	i = 0;
@@ -61,5 +90,20 @@ int		main(int argc, char **argv)
 	}
 	else
 		safe_exit(0);
+	//ft_putstrx2(map);
 	return (0);
+}
+
+void	ft_putstrx2(char **map)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (map[j])
+	{
+		ft_putstr(map[j]);
+		j++;
+	}
 }

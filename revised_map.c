@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 22:41:52 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/01 03:35:32 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/01 03:49:11 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,14 @@ int			check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
 		}
 		else
 			return (-1);
-		map_increment(map, tetriminos[ti], points);
+		map_increment(tetriminos[ti], points);
 		//make the points equal something
 		//Move up the cooridnates point part
 		if (!transfer(map, points, coordinates))
 			return (-1);
 	}
 	place_block(map, ti, coordinates);
+	ft_putstrx2(map);
 	return (0);
 }
 
