@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:22:47 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/06/01 04:36:38 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/01 08:26:11 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,34 +74,33 @@ int		main(int argc, char **argv)
 {
 	int			ti;
 	int			map_size;
+	char **map;
 	t_tetrimino **tetriminos;
+	map_size = 6;
 
+	map = map_init(map_size);
 	if (argc == 2)
 	{
 		tetriminos = read_input(argv[1]);
-		map_size = 0;
 		while (tetriminos[map_size])
 			map_size++;
 		ti = 0;
-		check_map(map_init(map_size), tetriminos, map_size, ti);
+		check_map(map, tetriminos, map_size, ti);
 	}
 	else
 		safe_exit(0);
 	//ft_putstrx2(map);
-	printf("Stupid");
 	return (0);
 }
 
 void	ft_putstrx2(char **map)
 {
-	int i;
 	int j;
 
-	i = 0;
 	j = 0;
 	while (map[j])
 	{
-		ft_putstr(map[j]);
+		ft_putendl(map[j]);
 		j++;
 	}
 }
