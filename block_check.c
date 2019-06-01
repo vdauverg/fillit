@@ -6,7 +6,7 @@
 /*   By: hecampbe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:44:17 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/05/31 02:53:42 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/05/31 21:11:22 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char		**map_increment(char **map, t_tetrimino *tetriminos, t_pos points)
 		return (map);
 	if (x < tmp_x)
 		points.map_x--;
+	points.i++;
 	return (map);
 }
 

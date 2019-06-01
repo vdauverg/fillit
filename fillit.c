@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:22:47 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/05/29 15:33:18 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/05/31 19:33:05 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	safe_exit(int fd)
 	exit(0);
 }
 
-char	**map_init(t_tetrimino **tetriminos, int num)
+char	**map_init(int num)
 {
 	int		i;
 	int		j;
@@ -56,7 +56,7 @@ int		main(int argc, char **argv)
 		while (tetriminos[map_size])
 			map_size++;
 		ti = 0;
-		check_map(map_init(tetriminos, map_size), tetriminos, map_size, ti);
+		check_map(map_init(map_size), tetriminos, map_size, ti);
 	}
 	else
 		safe_exit(0);
