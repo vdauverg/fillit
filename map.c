@@ -6,11 +6,12 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 23:49:57 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/01 04:32:28 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/01 04:36:20 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
 char	**place_block(char **map, int ti, unsigned char **coordinates, t_pos points)
 {

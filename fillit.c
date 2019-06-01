@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/01 03:56:05 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/06/01 03:57:01 by vdauverg         ###   ########.fr       */
+/*   Created: 2019/05/07 16:22:47 by vdauverg          #+#    #+#             */
+/*   Updated: 2019/06/01 04:36:38 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
 void	safe_exit(int fd)
 {
@@ -87,6 +88,7 @@ int		main(int argc, char **argv)
 	else
 		safe_exit(0);
 	//ft_putstrx2(map);
+	printf("Stupid");
 	return (0);
 }
 

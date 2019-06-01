@@ -6,11 +6,12 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 22:41:52 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/01 04:34:25 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/01 04:36:48 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
 int				check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
 {
@@ -26,6 +27,7 @@ int				check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
 	first_block(map, tetriminos, points, ti);
 	while (points.i < 4)
 	{
+	printf("Printf");
 		if (map[points.map_y][points.map_x] == '\0' && points.map_y < mmv)
 		{
 			points.map_x = 0;
@@ -37,7 +39,9 @@ int				check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
 		//make the points equal something
 		//Move up the cooridnates point part
 		if (!transfer(map, points, coordinates))
+			//not saving data
 			return (-1);
+		points.map_x++;
 	}
 	map = place_block(map, ti, coordinates, points);
 	ft_putstrx2(map);
