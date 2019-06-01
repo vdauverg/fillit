@@ -6,11 +6,12 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 22:41:52 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/01 03:37:08 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/06/01 03:47:32 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
 int			check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
 {
@@ -24,6 +25,7 @@ int			check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
 	points.i = 0;
 	coordinates = NULL;
 	first_block(map, tetriminos, points, ti);
+	printf("Printf");
 	while ((points.map_x < mmv && points.map_y < mmv) && i < 4)
 	{
 		if (map[points.map_y][points.map_x] == '\0' && points.map_y < mmv)
