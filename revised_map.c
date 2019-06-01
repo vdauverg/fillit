@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 22:41:52 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/01 04:36:48 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/01 07:48:23 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int				check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
 {
-	unsigned char	**coordinates;
+	int				**coordinates;
 	int				i;
 	t_pos			points;
 
@@ -48,8 +48,7 @@ int				check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
 	return (0);
 }
 
-unsigned char	**transfer(char **map, t_pos points,
-		unsigned char **coordinates)
+int		**transfer(char **map, t_pos points, int **coordinates)
 {
 	if (map[points.map_y][points.map_x] == '.')
 	{
@@ -60,5 +59,21 @@ unsigned char	**transfer(char **map, t_pos points,
 		ft_strdel((char **)coordinates);
 		//coordinates = NULL;
 	points.i++;
+	return (coordinates);
+}
+
+int		**coord_init(int **coordinates)
+{
+	int		i;
+
+	coordinates = (int **)malloc(sizeof(int *) * (5));
+	coordinates[4] = NULL;
+	i = 0;
+	while (i < 3)
+	{
+		coordinates[i] = (int *)malloc(sizeof(int) * (3));
+		coordinates[i][2] = '\0';
+		i++;
+	}
 	return (coordinates);
 }
