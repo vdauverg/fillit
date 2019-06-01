@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   revised_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hecampbe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 22:41:52 by hecampbe          #+#    #+#             */
 /*   Updated: 2019/06/01 03:00:49 by hecampbe         ###   ########.fr       */
