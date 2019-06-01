@@ -6,44 +6,60 @@
 /*   By: hecampbe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:44:17 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/05/29 15:46:47 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/05/31 21:11:22 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-char		**map_increment(char **map, t_tetrimino **tetriminos, int i, int ti, int map_x, int map_y)
+char		**map_increment(char **map, t_tetrimino *tetriminos, t_pos points)
 {
 	int x;
 	int y;
 	int tmp_x;
 	int tmp_y;
 
-	tmp_x = tetriminos[ti]->blocks[i - 1].x;
-	tmp_y = tetriminos[ti]->blocks[i - 1].y;
-	x = tetriminos[ti]->blocks[i].x;
-	y = tetriminos[ti]->blocks[i].y;
+	tmp_x = tetriminos->blocks[points.i - 1].x;
+	tmp_y = tetriminos->blocks[points.i - 1].y;
+	x = tetriminos->blocks[points.i].x;
+	y = tetriminos->blocks[points.i].y;
 	if (y > tmp_y)
-		map_y++;
+		points.map_y++;
 	if (x > tmp_x)
-		map_x++;
-	if (map_x == '\0' || map_y > max_y == '\0')
-		return (1);
+		points.map_x++;
+	if (points.map_x == '\0' || points.map_y == '\0')
+		return (map);
 	if (x < tmp_x)
-		map_x--;
-	return (map[map_y][map_x]);
+		points.map_x--;
+	points.i++;
+	return (map);
 }
 
-char		**first_block(char **map, int map_x, int map_y)
+char		**first_block(char **map, t_tetrimino **tetriminos, t_pos points, int ti)
 {
-	while (map[map_y][map_x] != '.')
+	while (map[points.map_y][points.map_x] != '.')
 	{
-		map_x++;
-		if (map_x == '\0')
+		points.map_x++;
+		if (points.map_x == '\0')
 		{
-			map_x = 0;
-			map_y++;
+			points.map_x = 0;
+			points.map_y++;
 		}
 	}
-	return (map[map_y][map_x]);
+	return (special_case(map, tetriminos[ti], points));
+}
+
+char		**special_case(char **map, t_tetrimino *tetriminos, t_pos points)
+{
+	int	tmp_x;
+	int	tmp_y;
+
+	tmp_x = tetriminos->blocks[0].x;
+	tmp_y = tetriminos->blocks[0].y;
+	while (tmp_x > 0)
+	{
+		points.map_x++;
+		tmp_x--;
+	}
+	return (map);
 }
