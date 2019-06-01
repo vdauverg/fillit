@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   block_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hecampbe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:44:17 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/01 03:15:32 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/06/01 04:06:23 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		map_increment(t_tetrimino *tetriminos, t_pos points)
 	points.i++;
 }
 
-char		**first_block(char **map, t_tetrimino **tetriminos, t_pos points, int ti)
+char	**first_block(char **map, t_tetrimino **tetriminos, t_pos points, int ti)
 {
 	while (map[points.map_y][points.map_x] != '.')
 	{
@@ -49,7 +49,7 @@ char		**first_block(char **map, t_tetrimino **tetriminos, t_pos points, int ti)
 	return (special_case(map, tetriminos[ti], points));
 }
 
-char		**special_case(char **map, t_tetrimino *tetriminos, t_pos points)
+char	**special_case(char **map, t_tetrimino *tetriminos, t_pos points)
 {
 	int	tmp_x;
 	int	tmp_y;

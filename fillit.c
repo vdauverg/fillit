@@ -20,12 +20,38 @@ void	safe_exit(int fd)
 	exit(0);
 }
 
+// char	**map_init(int num)
+// {
+// 	int		i;
+// 	int		j;
+// 	char	**map;
+
+// 	num *= 2;
+// 	map = (char **)malloc(sizeof(char *) * (num + 1));
+// 	map[num] = NULL;
+// 	i = 0;
+// 	while (i < num)
+// 	{
+// 		map[i] = (char *)malloc(sizeof(char) * (num + 1));
+// 		map[i][num] = 0;
+// 		j = 0;
+// 		while (j < num)
+// 		{
+// 			map[i][j] = '.';
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (map);
+// }
+
 char	**map_init(int num)
 {
 	int		i;
 	int		j;
 	char	**map;
 
+	num = 4;
 	map = (char **)malloc(sizeof(char *) * (num + 1));
 	map[num] = NULL;
 	i = 0;

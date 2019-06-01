@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 22:41:52 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/01 03:47:32 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/06/01 04:06:21 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int			check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
 	points.i = 0;
 	coordinates = NULL;
 	first_block(map, tetriminos, points, ti);
-	printf("Printf");
 	while ((points.map_x < mmv && points.map_y < mmv) && i < 4)
 	{
+	printf("Printf");
 		if (map[points.map_y][points.map_x] == '\0' && points.map_y < mmv)
 		{
 			points.map_x = 0;
@@ -39,7 +39,9 @@ int			check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
 		//make the points equal something
 		//Move up the cooridnates point part
 		if (!transfer(map, points, coordinates))
+			//not saving data
 			return (-1);
+		points.map_x++;
 	}
 	place_block(map, ti, coordinates);
 	ft_putstrx2(map);
