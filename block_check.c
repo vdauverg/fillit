@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:44:17 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/01 07:29:21 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/01 07:51:21 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	**special_case(char **map, t_tetrimino *tetriminos, t_pos points)
 	return (map);
 }
 
-char	**place_block(char **map, int ti, unsigned char **coordinates, t_pos points)
+char	**place_block(char **map, int ti, int **coordinates, t_pos points)
 {
 	char	t_letter;
 
