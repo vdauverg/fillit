@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   revised_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hecampbe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 22:41:52 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/05/29 15:34:11 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/05/29 15:41:40 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int			check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
 	point = 0;
 	coordinates = NULL;
 	first_block(map, map_x, map_y);
-	while ((max_x < mmv && map_y < mmv) && i < 4)
+	while ((map_x < mmv || map_y < mmv) && i < 4)
 	{
 		if (map[map_y][map_x] == '\0' && map_y < mmv)
 		{
