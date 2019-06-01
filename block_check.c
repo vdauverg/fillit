@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   block_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hecampbe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:44:17 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/05/31 21:11:22 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/06/01 03:06:02 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-char		**map_increment(char **map, t_tetrimino *tetriminos, t_pos points)
+void		map_increment(char **map, t_tetrimino *tetriminos, t_pos points)
 {
 	int x;
 	int y;
@@ -27,12 +27,11 @@ char		**map_increment(char **map, t_tetrimino *tetriminos, t_pos points)
 		points.map_y++;
 	if (x > tmp_x)
 		points.map_x++;
-	if (points.map_x == '\0' || points.map_y == '\0')
+	if (!(points.map_x) || !(points.map_y))
 		return (map);
 	if (x < tmp_x)
 		points.map_x--;
 	points.i++;
-	return (map);
 }
 
 char		**first_block(char **map, t_tetrimino **tetriminos, t_pos points, int ti)

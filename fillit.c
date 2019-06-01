@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:22:47 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/05/31 19:33:05 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/06/01 03:20:31 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	**map_init(int num)
 	int		j;
 	char	**map;
 
+	num *= 2;
 	map = (char **)malloc(sizeof(char *) * (num + 1));
 	map[num] = NULL;
 	i = 0;
