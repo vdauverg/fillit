@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "fillit.h": "c",
+        "stdio.h": "c"
+    }
+}

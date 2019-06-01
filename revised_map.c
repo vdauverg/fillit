@@ -6,14 +6,13 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 22:41:52 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/01 04:36:48 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/01 07:49:57 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
-int				check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
+int	check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
 {
 	unsigned char	**coordinates;
 	int				i;
@@ -27,7 +26,6 @@ int				check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
 	first_block(map, tetriminos, points, ti);
 	while (points.i < 4)
 	{
-	printf("Printf");
 		if (map[points.map_y][points.map_x] == '\0' && points.map_y < mmv)
 		{
 			points.map_x = 0;
@@ -48,17 +46,23 @@ int				check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
 	return (0);
 }
 
-unsigned char	**transfer(char **map, t_pos points,
-		unsigned char **coordinates)
+int	**transfer(char **map, t_pos points,
+		int **coordinates)
 {
+	int	i;
+
+	i = 0;
 	if (map[points.map_y][points.map_x] == '.')
 	{
 		coordinates[points.i][0] = points.map_x;
 		coordinates[points.i][1] = points.map_y;
 	}
 	else
-		ft_strdel((char **)coordinates);
-		//coordinates = NULL;
+	{
+		while (coordinates[i])
+			free(coordinates[i++]);
+		free(coordinates);
+	}
 	points.i++;
 	return (coordinates);
 }
