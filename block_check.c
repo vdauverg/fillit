@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:44:17 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/01 04:17:41 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/01 04:34:26 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void		map_increment(t_tetrimino *tetriminos, t_pos points)
 		points.map_x++;
 	if (x < tmp_x)
 		points.map_x--;
-	points.i++;
 }
 
 char	**first_block(char **map, t_tetrimino **tetriminos, t_pos points, int ti)

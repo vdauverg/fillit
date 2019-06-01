@@ -6,13 +6,13 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 22:41:52 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/01 04:32:45 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/01 04:34:25 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
+int				check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
 {
 	unsigned char	**coordinates;
 	int				i;
