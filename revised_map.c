@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 22:41:52 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/02 15:34:12 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/06/02 16:39:08 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int		**transfer(char **map, t_pos *points, int **coordinates)
 		while (coordinates[i])
 			free(coordinates[i++]);
 		free(coordinates);
+		coordinates = NULL;
 	}
 	ft_putendl("transferx2");
 	return (coordinates);
