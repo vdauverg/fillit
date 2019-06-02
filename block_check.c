@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:44:17 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/01 23:17:35 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/06/02 15:56:22 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ t_pos		map_increment(t_tetrimino *tetriminos, t_pos *points)
 	y = tetriminos->blocks[points->i].y;
 	if (y > tmp_y)
 		points->map_y++;
-	if (y > tmp_y)
-		points->map_y--;
 	if (x > tmp_x)
 		points->map_x++;
+	if (x < tmp_x)
+		points->map_x--;
 	if (x < tmp_x)
 		points->map_x--;
 	ft_putendl("Map_I");
@@ -74,7 +74,6 @@ char	**place_block(char **map, int ti, int **coordinates, t_pos *points)
 	while (coordinates[points->i])
 	{
 		map[coordinates[points->i][1]][coordinates[points->i][0]] = t_letter;
-		t_letter++;
 		points->i++;
 	}
 	ft_putendl("Place_block");

@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:22:47 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/06/01 23:57:22 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/06/02 15:58:49 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,11 @@ int		main(int argc, char **argv)
 			map_size++;
 		ti = 0;
 		check_map(map, tetriminos, map_size, ti);
+		ti++;
+		check_map(map, tetriminos, map_size, ti);
 	}
 	else
 		safe_exit(0);
-	//ft_putstrx2(map);
 	return (0);
 }
 
