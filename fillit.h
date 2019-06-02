@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 09:15:45 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/06/01 07:52:15 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/01 22:50:26 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ t_tetrimino		**read_input(char *input);
 //	Checking Map and Tetrimino Placement
 int				check_map(char **map, t_tetrimino **tetriminos, \
 					int mmv, int ti);
-char			**place_block(char **map, int ti, int **coordinates, t_pos points);
-void			map_increment(t_tetrimino *tetriminos, t_pos points);
-char			**first_block(char **map, t_tetrimino **tetriminos, t_pos points, int ti);
-char			**special_case(char **map, t_tetrimino *tetriminos, t_pos points);
-int				**transfer(char **map, t_pos points, int **coordinates);
+char			**place_block(char **map, int ti, int **coordinates, t_pos *points);
+t_pos			map_increment(t_tetrimino *tetriminos, t_pos *points);
+char			**first_block(char **map, t_tetrimino **tetriminos, t_pos *points, int ti);
+char			**special_case(char **map, t_tetrimino *tetriminos, t_pos *points);
+int				**transfer(char **map, t_pos *points, int **coordinates);
 void			ft_putstrx2(char **map);
 int				**coord_init(int **coordinates);
 //	Main
