@@ -6,13 +6,13 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 22:41:52 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/03 07:30:56 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/03 08:05:45 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int	*check_map(char **map, t_tetrimino *tetriminos, int mmv, int *prev_start)
+int	*check_map(char **map, t_tetrimino *tetriminos, int *prev_start)
 {
 	int				**coordinates;
 	t_pos			points;
@@ -30,8 +30,8 @@ int	*check_map(char **map, t_tetrimino *tetriminos, int mmv, int *prev_start)
 			prev_start[2] = 0;
 			return (prev_start);
 		}
-		i++;
 		points = map_increment(tetriminos, points, i);
+		i++;
 	}
 	prev_start[2] = 1;
 	return (prev_start);

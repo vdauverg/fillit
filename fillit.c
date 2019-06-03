@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:22:47 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/06/03 07:31:27 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/03 08:43:44 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,6 @@ char	**place_block(char **map, t_tetrimino *tetriminos, int ti, int *prev_start)
 	t_letter = 'A';
 	t_letter = t_letter + ti;
 	i = 0;
-	ft_putnbr(prev_start[0]);
-	ft_putchar(' ');
-	ft_putnbr(prev_start[1]);
-	ft_putchar('\n');
 	while (i < 4)
 	{
 		x = tetriminos->blocks[i].x + prev_start[0];
@@ -116,33 +112,7 @@ int		main(int argc, char **argv)
 		prev_start[1] = 0;
 		prev_start[2] = 1;
 		ti = 0;
-		prev_start = check_map(map, tetriminos[ti], map_size, prev_start);
-		if (prev_start[2] != 0)
-		{
-			map = place_block(map, tetriminos[ti], ti, prev_start);
-			ti++;
-			while ((i == 0 || prev_start[2] == 0) && prev_start[0] < 10)
-			{
-				prev_start[0]++;
-				prev_start = check_map(map, tetriminos[ti], map_size, prev_start);
-				i++;
-			}
-			if (prev_start[2] != 0)
-			{
-				map = place_block(map, tetriminos[ti], ti, prev_start);
-				ti++;
-				while ((i == 0 || prev_start[2] == 0) && prev_start[0] < 10)
-				{
-					prev_start[0]++;
-					prev_start = check_map(map, tetriminos[ti], map_size, prev_start);
-					i++;
-				}
-				if (prev_start[2] != 0)
-				{
-					map = place_block(map, tetriminos[ti], ti, prev_start);
-				}
-			}
-		}
+		map = recursion(map, tetriminos, ti, prev_start);
 		ft_putstrx2(map);
 	}
 	else
