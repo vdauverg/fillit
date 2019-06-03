@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/02 16:47:40 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/03 08:51:37 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/03 08:58:52 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,30 @@ char	**recursion(char **map, t_tetrimino **tetriminos, int ti, int *prev_start)
 
 char		**map_increase(char **map, int map_size)
 {
-	return (map);
+	int j;
+	int i;
+	char **new_map;
+
+	j = 0;
+	new_map = (char **)malloc(sizeof(char *) * (map_size + 1));
+	i = ft_strlen(new_map[j]);
+	new_map[map_size] = NULL;
+	while (new_map[j])
+	{
+		new_map[j] = (char *)malloc(sizeof(char) * (map_size + 1));
+		new_map[j] = ft_strcpy(new_map[j], map[j]);
+		new_map[j][i] = '.';
+		j++;
+		if (j == i)
+		{
+			i = 0;
+			while (new_map[j][i] != '\0')
+			{
+				new_map[j][i] = '.';
+				i++;
+			}
+			break ;
+		}
+	}
+	return (new_map);
 }
