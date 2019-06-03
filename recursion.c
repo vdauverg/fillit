@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/02 16:47:40 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/03 08:51:37 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/03 09:11:21 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,26 +53,33 @@ char	**recursion(char **map, t_tetrimino **tetriminos, int ti, int *prev_start)
 	int		i;
 	int		size;
 	
-	i = 0;
+	i = -1;
 	size = ft_strlen(map[0]);
 	tmp_map = (char **)malloc(sizeof(char *) * (size + 1));
 	tmp_map[size] = NULL;
-	while (tmp_map[i])
-		tmp_map[i] = ft_strdup(map[i++]);
+	while (tmp_map[++i])
+		tmp_map[i] = ft_strdup(map[i]);
 	i = 0;
 	while (i == 0 || prev_start[2] == 0)
 	{
 		prev_start[0]++;
-		prev_start = check_map(map, tetriminos[ti], prev_start);
+		prev_start = check_map(tmp_map, tetriminos[ti], prev_start);
 		i++;
 	}
-	if (prev_start[2] != 0 && (map = recursion(map, tetriminos, ti, prev_start)))
-		map = place_block(map, tetriminos[ti], ti, prev_start);
-	else
+	if (prev_start[2] != 0)
 	{
-		map = map_increase(map);
-		return (NULL);
+		tmp_map = recursion(tmp_map, tetriminos, ti++, prev_start);
+		map = tmp_map;
+		map = place_block(tmp_map, tetriminos[ti], ti, prev_start);
 	}
+	else
+		map = map_increase(map, size);
+	i = 0;
+	while (tmp_map[i])
+			free(tmp_map[i++]);
+		free(tmp_map);
+		tmp_map = NULL;
+	return(map);
 }
 
 char		**map_increase(char **map, int map_size)
