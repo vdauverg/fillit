@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 09:15:45 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/06/02 15:24:24 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/06/02 23:18:06 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,6 @@ void			ft_putstrx2(char **map);
 int				**coord_init(int **coordinates);
 //	Main
 void			safe_exit(int fd);
+char			**recursion(char **map, t_tetrimino **tetriminos, int rec_i, int ti, int map_size);
+char			**map_increase(char **map, int map_size);
 #endif

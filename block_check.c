@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:44:17 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/02 15:56:22 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/06/02 21:29:44 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_pos		map_increment(t_tetrimino *tetriminos, t_pos *points)
 		points->map_x++;
 	if (x < tmp_x)
 		points->map_x--;
-	if (x < tmp_x)
+	if (x < tmp_x && (x < tmp_x - 1))
 		points->map_x--;
 	ft_putendl("Map_I");
 	return (*points);

@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 22:41:52 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/02 16:39:08 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/06/02 21:17:48 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,17 @@ int	check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
 	mmv = 0;
 	while (points.i < 4)
 	{
-		//ft_putendl("Hector is Cool");
-		ft_putnbr(points.i);
-		ft_putchar('\n');
-		//ft_putnbr();
-		/*if (map[points.map_y][points.map_x] == '\0' && points.map_y < mmv)
-		{
-			points.map_x = 0;
-			points.map_y++;
-			ft_putendl("stuff");
-		}
-		//Modify this if loop, it serves no purpose, maybe change it to
-		//still check for the correct stuff in the map
-		else if (points.map_y == mmv && map[points.map_y][points.map_x] == '\0')
-			return (-1);*/
+		if (points.map_y == mmv && map[points.map_y][points.map_x] == '\0')
+			return (1);
 		ft_putendl("after if");
 		if (!transfer(map, &points, coordinates))
-			return (-1);
+			return (2);
 		points.i++;
 		map_increment(tetriminos[ti], &points);
 	}
 	ft_putendl("End of check_map");
 	map = place_block(map, ti, coordinates, &points);
-	ft_putstrx2(map);
+	//ft_putstrx2(map);
 	return (0);
 }
 
