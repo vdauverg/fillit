@@ -6,62 +6,43 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 22:41:52 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/02 16:39:08 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/06/03 06:47:27 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int	check_map(char **map, t_tetrimino **tetriminos, int mmv, int ti)
+int	*check_map(char **map, t_tetrimino *tetriminos, int mmv, int *prev_start)
 {
 	int				**coordinates;
 	t_pos			points;
+	int				i;
 
-	points.map_x = 0;
-	points.map_y = 0;
-	points.i = 0;
-	coordinates = NULL;
+	points.map_x = prev_start[0];
+	points.map_y = prev_start[1];
 	coordinates = coord_init(coordinates);
-	first_block(map, tetriminos, &points, ti);
-	mmv = 0;
-	while (points.i < 4)
+	first_block(map, tetriminos, &points, prev_start);
+	i = 1;
+	while (i < 4)
 	{
-		//ft_putendl("Hector is Cool");
-		ft_putnbr(points.i);
-		ft_putchar('\n');
-		//ft_putnbr();
-		/*if (map[points.map_y][points.map_x] == '\0' && points.map_y < mmv)
+		if (!transfer(map, &points, coordinates, i))
 		{
-			points.map_x = 0;
-			points.map_y++;
-			ft_putendl("stuff");
+			prev_start[2] = 0;
+			return (prev_start);
 		}
-		//Modify this if loop, it serves no purpose, maybe change it to
-		//still check for the correct stuff in the map
-		else if (points.map_y == mmv && map[points.map_y][points.map_x] == '\0')
-			return (-1);*/
-		ft_putendl("after if");
-		if (!transfer(map, &points, coordinates))
-			return (-1);
-		points.i++;
-		map_increment(tetriminos[ti], &points);
+		i++;
+		points = map_increment(tetriminos, points, i);
 	}
-	ft_putendl("End of check_map");
-	map = place_block(map, ti, coordinates, &points);
-	ft_putstrx2(map);
-	return (0);
+	prev_start[2] = 1;
+	return (prev_start);
 }
 
-int		**transfer(char **map, t_pos *points, int **coordinates)
+int	**transfer(char **map, t_pos *points, int **coordinates, int i)
 {
-	int	i;
-
-	i = 0;
 	if (map[points->map_y][points->map_x] == '.')
 	{
-		coordinates[points->i][0] = points->map_x;
-		coordinates[points->i][1] = points->map_y;
-		ft_putendl("transfer");
+		coordinates[i][0] = points->map_x;
+		coordinates[i][1] = points->map_y;
 	}
 	else
 	{
@@ -70,11 +51,10 @@ int		**transfer(char **map, t_pos *points, int **coordinates)
 		free(coordinates);
 		coordinates = NULL;
 	}
-	ft_putendl("transferx2");
 	return (coordinates);
 }
 
-int		**coord_init(int **coordinates)
+int	**coord_init(int **coordinates)
 {
 	int		i;
 

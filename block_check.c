@@ -6,76 +6,69 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:44:17 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/02 15:56:22 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/06/03 07:19:24 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-t_pos		map_increment(t_tetrimino *tetriminos, t_pos *points)
+t_pos	map_increment(t_tetrimino *tetriminos, t_pos points, int i)
 {
 	int x;
 	int y;
 	int tmp_x;
 	int tmp_y;
 
-	tmp_x = tetriminos->blocks[points->i - 1].x;
-	tmp_y = tetriminos->blocks[points->i - 1].y;
-	x = tetriminos->blocks[points->i].x;
-	y = tetriminos->blocks[points->i].y;
+	tmp_x = tetriminos->blocks[i - 1].x;
+	tmp_y = tetriminos->blocks[i - 1].y;
+	x = tetriminos->blocks[i].x;
+	y = tetriminos->blocks[i].y;
 	if (y > tmp_y)
-		points->map_y++;
+		points.map_y++;
 	if (x > tmp_x)
-		points->map_x++;
+		points.map_x++;
 	if (x < tmp_x)
-		points->map_x--;
-	if (x < tmp_x)
-		points->map_x--;
-	ft_putendl("Map_I");
-	return (*points);
+		points.map_x--;
+	if (x < tmp_x && x < tmp_x - 1)
+		points.map_x--;
+	return (points);
 }
 
-char	**first_block(char **map, t_tetrimino **tetriminos, t_pos *points, int ti)
+char	**first_block(char **map, t_tetrimino *tetriminos, \
+			t_pos *points, int *prev_start)
 {
-	while (map[points->map_y] && map[points->map_y][points->map_x] != '.')
+	int	x;
+	int	y;
+
+	x = points->map_x;
+	y = points->map_y;
+	while (map[y] && map[y][x] != '.' && \
+		!(map[y + 1][x] != '.' || map[y][x + 1] != '.'))
 	{
-		points->map_x++;
-		if (!map[points->map_y][points->map_x])
+		ft_putendl("hello");
+		x++;
+		if (!map[y][x])
 		{
-			points->map_x = 0;
-			points->map_y++;
+			x = 0;
+			y++;
 		}
 	}
-	return (special_case(map, tetriminos[ti], points));
+	points->map_x = x;
+	points->map_y = y;
+	prev_start[0] = x;
+	prev_start[1] = y;
+	return (special_case(map, tetriminos, points));
 }
 
 char	**special_case(char **map, t_tetrimino *tetriminos, t_pos *points)
 {
 	int	tmp_x;
-	int	tmp_y;
 
 	tmp_x = tetriminos->blocks[0].x;
-	tmp_y = tetriminos->blocks[0].y;
 	while (tmp_x > 0)
 	{
 		points->map_x++;
 		tmp_x--;
 	}
-	return (map);
-}
-
-char	**place_block(char **map, int ti, int **coordinates, t_pos *points)
-{
-	char	t_letter;
-
-	t_letter = 'a';
-	t_letter = t_letter + ti;
-	points->i = 0;
-	while (coordinates[points->i])
-	{
-		map[coordinates[points->i][1]][coordinates[points->i][0]] = t_letter;
-		points->i++;
-	}
-	ft_putendl("Place_block");
 	return (map);
 }

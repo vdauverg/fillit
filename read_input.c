@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 19:59:53 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/05/28 21:33:33 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/02 23:25:15 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ t_tetrimino	**read_input(char *input)
 
 	((fd = open(input, O_RDONLY)) <= 0) ? safe_exit(0) : 0;
 	tetriminos = (t_tetrimino **)malloc(sizeof(t_tetrimino *) * 27);
+	tetriminos[26] = NULL;
 	num = 0;
 	tmp = NULL;
 	while ((check = read_piece(fd, &tmp)) != 2 || (check == 2 && num == 0))
@@ -67,9 +68,7 @@ t_tetrimino	**read_input(char *input)
 		if (check == 1)
 			tetriminos[num] = tmp;
 		else
-		{
 			free_exit(tmp, tetriminos, num, fd);
-		}
 		tmp = NULL;
 		num++;
 	}

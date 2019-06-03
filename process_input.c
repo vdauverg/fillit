@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 15:36:09 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/05/27 01:00:29 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/06/02 18:03:54 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ t_tetrimino	*check_blocks(t_block *blocks, int fd)
 
 	connections = 0;
 	i = 0;
-	blocks->touching = ft_strnew(4);
-	ft_bzero(blocks->touching, 4);
 	tetrimino = (t_tetrimino *)malloc(sizeof(t_tetrimino));
 	while (i < 4)
 	{

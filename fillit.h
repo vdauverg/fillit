@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 09:15:45 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/06/02 15:24:24 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/06/03 06:42:02 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,16 @@ typedef struct	s_block
 {
 	int		x;
 	int		y;
-	char	*touching;
 }				t_block;
 
 typedef struct	s_tetrimino
 {
 	t_block	*blocks;
-	int		placed;
 	int		width;
 	int		height;
 }				t_tetrimino;
 
-typedef struct s_pos
+typedef struct	s_pos
 {
 	int map_x;
 	int map_y;
@@ -39,24 +37,30 @@ typedef struct s_pos
 
 //	Process Input
 void			free_exit(t_tetrimino *tmp, t_tetrimino **tetriminos, \
-					int num, int fd);
+				int num, int fd);
 int				find_adjacent_blocks(t_tetrimino *tetrimino, \
-					t_block *blocks, int i);
+				t_block *blocks, int i);
 int				read_piece(int fd, t_tetrimino **tmp);
 t_tetrimino		*check_blocks(t_block *blocks, int fd);
 t_tetrimino		*check_piece(char *piece, int fd);
 t_tetrimino		**read_input(char *input);
 
 //	Checking Map and Tetrimino Placement
-int				check_map(char **map, t_tetrimino **tetriminos, \
-					int mmv, int ti);
-char			**place_block(char **map, int ti, int **coordinates, t_pos *points);
-t_pos			map_increment(t_tetrimino *tetriminos, t_pos *points);
-char			**first_block(char **map, t_tetrimino **tetriminos, t_pos *points, int ti);
-char			**special_case(char **map, t_tetrimino *tetriminos, t_pos *points);
-int				**transfer(char **map, t_pos *points, int **coordinates);
-void			ft_putstrx2(char **map);
+int				*check_map(char **map, t_tetrimino *tetriminos, \
+					int mmv, int *prev_start);
+char			**place_block(char **map, t_tetrimino *tetriminos, \
+					int ti, int *prev_start);
+t_pos			map_increment(t_tetrimino *tetriminos, t_pos points, int i);
+char			**first_block(char **map, t_tetrimino *tetriminos, \
+					t_pos *points, int *prev_start);
+char			**special_case(char **map, t_tetrimino *tetriminos, \
+					t_pos *points);
+int				**transfer(char **map, t_pos *points, int **coordinates, int i);
 int				**coord_init(int **coordinates);
+
 //	Main
+void			ft_putstrx2(char **map);
+char			**map_init(int num);
 void			safe_exit(int fd);
+
 #endif
