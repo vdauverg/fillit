@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:44:17 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/03 07:58:16 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/05 15:59:47 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ char	**first_block(char **map, t_tetrimino *tetriminos, \
 	while ((map[y] && map[y][x] != '.') || (map[y + 1] && \
 		(map[y + 1][x] != '.' || map[y][x + 1] != '.')))
 	{
-		ft_putendl("hello");
 		x++;
 		if (!map[y][x])
 		{
@@ -70,5 +69,11 @@ char	**special_case(char **map, t_tetrimino *tetriminos, t_pos *points)
 		points->map_x++;
 		tmp_x--;
 	}
+	ft_putendl("starting coords:");
+	ft_putnbr(points->map_x);
+	ft_putchar(' ');
+	ft_putnbr(points->map_y);
+	ft_putendl("");
+	ft_putendl("");
 	return (map);
 }

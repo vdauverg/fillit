@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:22:47 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/06/03 08:43:44 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/05 13:53:23 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,16 @@ int		square_root(int num)
 	return (i);
 }
 
-char	**map_init(int num)
+char	**map_init(t_tetrimino **tetriminos)
 {
 	int		i;
 	int		j;
+	int		num;
 	char	**map;
 
+	num = 0;
+	while (tetriminos[num])
+			num++;
 	num = square_root(num * 4);
 	map = (char **)malloc(sizeof(char *) * (num + 1));
 	map[num] = NULL;
@@ -92,23 +96,17 @@ char	**place_block(char **map, t_tetrimino *tetriminos, int ti, int *prev_start)
 int		main(int argc, char **argv)
 {
 	int			ti;
-	int			map_size;
 	int			*prev_start;
 	char		**map;
-	int			i;
 	t_tetrimino **tetriminos;
 
 	if (argc == 2)
 	{
-		i = 0;
 		if (!(tetriminos = read_input(argv[1])))
 			safe_exit(0);
-		map_size = 0;
-		while (tetriminos[map_size])
-			map_size++;
-		map = map_init(map_size);
+		map = map_init(tetriminos);
 		prev_start = (int *)malloc(sizeof(int) * 3);
-		prev_start[0] = 0;
+		prev_start[0] = -1;
 		prev_start[1] = 0;
 		prev_start[2] = 1;
 		ti = 0;

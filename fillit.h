@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 09:15:45 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/06/03 08:09:23 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/05 15:50:47 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct	s_pos
 {
 	int map_x;
 	int map_y;
-	int i;
 }				t_pos;
 
 //	Process Input
@@ -60,7 +59,7 @@ int				**coord_init(int **coordinates);
 
 //	Main
 void			ft_putstrx2(char **map);
-char			**map_init(int num);
+char			**map_init(t_tetrimino **tetriminos);
 void			safe_exit(int fd);
 // char			**recursion(char **map, t_tetrimino **tetriminos, int rec_i, \
 // 					int ti, int map_size);
