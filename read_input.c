@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 19:59:53 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/06/02 23:25:15 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/06 07:21:21 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ t_tetrimino	**read_input(char *input)
 		else
 			free_exit(tmp, tetriminos, num, fd);
 		tmp = NULL;
+		tetriminos[num]->placed = 0;
 		num++;
 	}
 	close(fd);

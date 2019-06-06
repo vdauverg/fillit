@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:44:17 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/05 15:59:47 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/06 05:18:31 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_pos	map_increment(t_tetrimino *tetriminos, t_pos points, int i)
 	int y;
 	int tmp_x;
 	int tmp_y;
+
 
 	tmp_x = tetriminos->blocks[i - 1].x;
 	tmp_y = tetriminos->blocks[i - 1].y;
@@ -56,24 +57,19 @@ char	**first_block(char **map, t_tetrimino *tetriminos, \
 	points->map_y = y;
 	prev_start[0] = x;
 	prev_start[1] = y;
-	return (special_case(map, tetriminos, points));
-}
-
-char	**special_case(char **map, t_tetrimino *tetriminos, t_pos *points)
-{
-	int	tmp_x;
-
-	tmp_x = tetriminos->blocks[0].x;
-	while (tmp_x > 0)
-	{
-		points->map_x++;
-		tmp_x--;
-	}
-	ft_putendl("starting coords:");
-	ft_putnbr(points->map_x);
-	ft_putchar(' ');
-	ft_putnbr(points->map_y);
-	ft_putendl("");
-	ft_putendl("");
+	// return (special_case(map, tetriminos, points));
 	return (map);
 }
+
+// char	**special_case(char **map, t_tetrimino *tetriminos, t_pos *points)
+// {
+// 	int	tmp_x;
+
+// 	tmp_x = tetriminos->blocks[0].x;
+// 	while (tmp_x > 0)
+// 	{
+// 		points->map_x++;
+// 		tmp_x--;
+// 	}
+// 	return (map);
+// }

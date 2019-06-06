@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:22:47 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/06/05 13:53:23 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/06 08:06:12 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,17 @@ void	ft_putstrx2(char **map)
 	}
 }
 
-char	**place_block(char **map, t_tetrimino *tetriminos, int ti, int *prev_start)
+char	**place_block(char **map, int ti, int **coordinates)
 {
 	char	t_letter;
 	int		i;
-	int		x;
-	int		y;
 
 	t_letter = 'A';
 	t_letter = t_letter + ti;
 	i = 0;
 	while (i < 4)
 	{
-		x = tetriminos->blocks[i].x + prev_start[0];
-		y = tetriminos->blocks[i].y + prev_start[1];
-		map[y][x] = t_letter;
+		map[coordinates[i][1]][coordinates[i][0]] = t_letter;
 		i++;
 	}
 	return (map);
@@ -95,7 +91,6 @@ char	**place_block(char **map, t_tetrimino *tetriminos, int ti, int *prev_start)
 
 int		main(int argc, char **argv)
 {
-	int			ti;
 	int			*prev_start;
 	char		**map;
 	t_tetrimino **tetriminos;
@@ -106,11 +101,10 @@ int		main(int argc, char **argv)
 			safe_exit(0);
 		map = map_init(tetriminos);
 		prev_start = (int *)malloc(sizeof(int) * 3);
-		prev_start[0] = -1;
+		prev_start[0] = 0;
 		prev_start[1] = 0;
 		prev_start[2] = 1;
-		ti = 0;
-		map = recursion(map, tetriminos, ti, prev_start);
+		map = recursion(map, tetriminos, 0, prev_start);
 		ft_putstrx2(map);
 	}
 	else

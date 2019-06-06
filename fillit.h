@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 09:15:45 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/06/05 15:50:47 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/06 06:56:59 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct	s_tetrimino
 	t_block	*blocks;
 	int		width;
 	int		height;
+	int		placed;
 }				t_tetrimino;
 
 typedef struct	s_pos
@@ -46,9 +47,9 @@ t_tetrimino		**read_input(char *input);
 
 //	Checking Map and Tetrimino Placement
 int				*check_map(char **map, t_tetrimino *tetriminos, \
-					int *prev_start);
-char			**place_block(char **map, t_tetrimino *tetriminos, \
 					int ti, int *prev_start);
+char			**place_block(char **map, int ti, \
+					int **coordinates);
 t_pos			map_increment(t_tetrimino *tetriminos, t_pos points, int i);
 char			**first_block(char **map, t_tetrimino *tetriminos, \
 					t_pos *points, int *prev_start);
@@ -61,8 +62,6 @@ int				**coord_init(int **coordinates);
 void			ft_putstrx2(char **map);
 char			**map_init(t_tetrimino **tetriminos);
 void			safe_exit(int fd);
-// char			**recursion(char **map, t_tetrimino **tetriminos, int rec_i, \
-// 					int ti, int map_size);
 char			**recursion(char **map, t_tetrimino **tetriminos, int ti, int *prev_start);
 char			**map_increase(char **map, int map_size);
 #endif
