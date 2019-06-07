@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/02 16:47:40 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/07 02:22:12 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/07 04:21:34 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	**recursion(char **map, t_tetrimino **tetriminos, int ti, int *prev_start)
 					while (tmp_map[i])
 						free(tmp_map[i++]);
 					i = 0;
-					while (i < size)
+					while (tmp_map[i])
 					{
 						tmp_map[i] = ft_strdup(map[i]);
 						i++;
@@ -66,15 +66,24 @@ char	**recursion(char **map, t_tetrimino **tetriminos, int ti, int *prev_start)
 					tetriminos[ti]->placed = 0;
 					ti--;
 				}
+				else
+					placed++;
 			}
 		}
 		else
 			placed++;
 		ti++;
 	}
-	if (prev_start[2] == -1 && placed == 0 && !tetriminos[ti])
+	ft_putnbr(prev_start[2]);
+	ft_putchar(' ');
+	ft_putnbr(placed);
+	ft_putchar(' ');
+	ft_putnbr(ti);
+	ft_putchar('\n');
+	if (prev_start[2] == -1 && placed == 0)
 	{
-		tmp_map = map_increase(tmp_map, size);
+		ft_putendl("lol");
+		tmp_map = map_increase(map, size);
 		tmp_map = recursion(tmp_map, tetriminos, 0, prev_start);
 	}
 	if (prev_start[2] == 1)
