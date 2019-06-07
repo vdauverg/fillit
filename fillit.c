@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:22:47 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/06/06 08:06:12 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/07 02:15:49 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	**map_init(t_tetrimino **tetriminos)
 
 	num = 0;
 	while (tetriminos[num])
-			num++;
+		num++;
 	num = square_root(num * 4);
 	map = (char **)malloc(sizeof(char *) * (num + 1));
 	map[num] = NULL;
