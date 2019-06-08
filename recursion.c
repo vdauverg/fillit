@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/02 16:47:40 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/07 22:20:48 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/07 22:50:05 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	**recursion(char **map, t_tetrimino **tetriminos, int rec_num, int *prev_st
 			{
 				tetriminos[ti]->placed = 1;
 				tmp_map = recursion(tmp_map, tetriminos, rec_num, prev_start);
+				ft_putendl("Running...");
 				if (prev_start[2] == -1)
 				{
 					i = 0;
@@ -76,6 +77,7 @@ char	**recursion(char **map, t_tetrimino **tetriminos, int rec_num, int *prev_st
 	}
 	if (rec_num == 0 && placed == 0)
 	{
+		ft_putendl("INCREASING MAP!!!");
 		map = map_increase(map, size);
 		map = recursion(map, tetriminos, -1, prev_start);
 	}
@@ -92,14 +94,6 @@ char	**recursion(char **map, t_tetrimino **tetriminos, int rec_num, int *prev_st
 	map_del(tmp_map);
 	return (map);
 }
-
-
-
-
-
-
-
-
 
 char		**map_increase(char **map, int map_size)
 {
@@ -134,17 +128,6 @@ char		**map_increase(char **map, int map_size)
 	map_del(map);
 	return (new_map);
 }
-
-
-
-
-
-
-
-
-
-
-
 
 void		map_del(char **map)
 {
