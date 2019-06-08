@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 09:15:45 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/06/07 21:50:05 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/08 00:22:43 by hecampbe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,10 @@ typedef struct	s_tetrimino
 
 typedef struct	s_pos
 {
-	int map_x;
-	int map_y;
+	int x;
+	int y;
 }				t_pos;
 
-//	Process Input
 void			free_exit(t_tetrimino *tmp, t_tetrimino **tetriminos, \
 				int num, int fd);
 int				find_adjacent_blocks(t_tetrimino *tetrimino, \
@@ -44,8 +43,6 @@ int				read_piece(int fd, t_tetrimino **tmp);
 t_tetrimino		*check_blocks(t_block *blocks, int fd);
 t_tetrimino		*check_piece(char *piece, int fd);
 t_tetrimino		**read_input(char *input);
-
-//	Checking Map and Tetrimino Placement
 int				*check_map(char **map, t_tetrimino *tetriminos, \
 					int ti, int *prev_start);
 char			**place_block(char **map, int ti, \
@@ -54,14 +51,13 @@ t_pos			map_increment(t_tetrimino *tetriminos, t_pos points, int i);
 char			**first_block(char **map, t_pos *points, int *prev_start);
 char			**special_case(char **map, t_tetrimino *tetriminos, \
 					t_pos *points);
-int				**transfer(char **map, t_pos *points, int **coordinates, int i);
+int				**t(char **map, t_pos *points, int **coordinates, int i);
 int				**coord_init(int **coordinates);
 void			map_del(char **map);
-
-//	Main
 void			ft_putstrx2(char **map);
 char			**map_init(t_tetrimino **tetriminos);
 void			safe_exit(int fd);
-char			**recursion(char **map, t_tetrimino **tetriminos, int ti, int *prev_start);
+char			**recursion(char **map, t_tetrimino **tetriminos, int ti, \
+		int *prev_start);
 char			**map_increase(char **map, int map_size);
 #endif
