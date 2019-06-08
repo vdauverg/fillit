@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 15:36:09 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/06/02 18:03:54 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/07 16:45:23 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ t_tetrimino	*check_blocks(t_block *blocks, int fd)
 	tetrimino->blocks = blocks;
 	tetrimino->height /= 2;
 	tetrimino->width /= 2;
+	tetrimino->placed = 0;
 	return (tetrimino);
 }
 

@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:22:47 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/06/07 02:15:49 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/07 16:58:15 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int		main(int argc, char **argv)
 		prev_start[0] = 0;
 		prev_start[1] = 0;
 		prev_start[2] = 1;
-		map = recursion(map, tetriminos, 0, prev_start);
+		map = recursion(map, tetriminos, -1, prev_start);
 		ft_putstrx2(map);
 	}
 	else
