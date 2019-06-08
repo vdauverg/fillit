@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/02 16:47:40 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/07 21:38:28 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/07 22:20:48 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ char	**recursion(char **map, t_tetrimino **tetriminos, int rec_num, int *prev_st
 			{
 				tetriminos[ti]->placed = 1;
 				tmp_map = recursion(tmp_map, tetriminos, rec_num, prev_start);
-				ft_putstrx2(tmp_map);
-				ft_putendl("");
 				if (prev_start[2] == -1)
 				{
 					i = 0;
@@ -76,33 +74,22 @@ char	**recursion(char **map, t_tetrimino **tetriminos, int rec_num, int *prev_st
 			placed++;
 		ti++;
 	}
-	ft_putnbr(prev_start[2]);
-	ft_putchar(' ');
-	ft_putnbr(placed);
-	ft_putchar(' ');
-	ft_putnbr(ti);
-	ft_putchar(' ');
-	ft_putnbr(rec_num);
-	ft_putchar('\n');
 	if (rec_num == 0 && placed == 0)
 	{
-		ft_putendl("lol");
-		tmp_map = map_increase(map, size);
-		tmp_map = recursion(tmp_map, tetriminos, rec_num, prev_start);
+		map = map_increase(map, size);
+		map = recursion(map, tetriminos, -1, prev_start);
 	}
-	if (prev_start[2] == 1)
+	else if (prev_start[2] == 1)
 	{
 		i = 0;
 		while (map[i])
 		{
-			strcpy(map[i], tmp_map[i]);
+			ft_strcpy(map[i], tmp_map[i]);
 			i++;
 		}
 	}
-
 	i = 0;
 	map_del(tmp_map);
-
 	return (map);
 }
 
@@ -145,8 +132,7 @@ char		**map_increase(char **map, int map_size)
 		}
 	}
 	map_del(map);
-	map = new_map;
-	return (map);
+	return (new_map);
 }
 
 

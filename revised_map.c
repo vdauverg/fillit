@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 22:41:52 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/07 01:57:42 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/07 21:49:49 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ int	*check_map(char **map, t_tetrimino *tetriminos, int ti, int *prev_start)
 
 	points.map_x = prev_start[0];
 	points.map_y = prev_start[1];
+	coordinates = NULL;
 	coordinates = coord_init(coordinates);
-	first_block(map, tetriminos, &points, prev_start);
+	first_block(map, &points, prev_start);
 	i = 0;
 	while (i < 4)
 	{
