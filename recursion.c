@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/02 16:47:40 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/08 00:31:09 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/06/08 05:25:36 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ char	**recursion(char **map, t_tetrimino **tetriminos, int rec_num, int *prev_st
 		prev_start[1] = start / size;
 		if (tetriminos[ti]->placed == 0)
 		{
-			ft_putnbr(ti);
-			ft_putchar('\n');
 			i = 0;
 			while (i == 0 || prev_start[2] == 0)
 			{
@@ -56,21 +54,17 @@ char	**recursion(char **map, t_tetrimino **tetriminos, int rec_num, int *prev_st
 				tmp_map = recursion(tmp_map, tetriminos, rec_num, prev_start);
 				if (prev_start[2] == -1)
 				{
-					i = 0;
-					while (tmp_map[i])
-						free(tmp_map[i++]);
-					i = 0;
-					while (tmp_map[i])
-					{
-						tmp_map[i] = ft_strdup(map[i]);
-						i++;
-					}
+					i = -1;
+					while (tmp_map[++i])
+						ft_strcpy(tmp_map[i], map[i]);
 					tetriminos[ti]->placed = 0;
 					ti--;
 				}
 				else
 					placed++;
 			}
+			else
+				start = 0;
 		}
 		else
 			placed++;

@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:44:17 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/08 00:23:28 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/06/08 22:48:06 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_pos	map_increment(t_tetrimino *tetriminos, t_pos points, int i)
 	return (points);
 }
 
-char	**first_block(char **map, t_pos *points, int *prev_start)
+char	**first_block(char **map, t_pos *points)
 {
 	int	x;
 	int	y;
@@ -52,7 +52,5 @@ char	**first_block(char **map, t_pos *points, int *prev_start)
 	}
 	points->x = x;
 	points->y = y;
-	prev_start[0] = x;
-	prev_start[1] = y;
 	return (map);
 }

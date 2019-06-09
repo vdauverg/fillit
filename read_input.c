@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 19:59:53 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/06/07 16:49:37 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/08 05:25:48 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@ int			read_piece(int fd, t_tetrimino **tmp)
 {
 	int		i;
 	int		len;
+	int		res;
 	char	*line;
 	char	*piece;
 
 	piece = "";
 	i = 0;
-	while (get_next_line(fd, &line) > 0)
+	while ((res = get_next_line(fd, &line)) >= 0)
 	{
 		(*line) ? len = ft_strlen(line) : 0;
 		if (*line && len == 4)
@@ -40,7 +41,7 @@ int			read_piece(int fd, t_tetrimino **tmp)
 		{
 			ft_strdel(&line);
 			*tmp = check_piece(piece, fd);
-			return (1);
+			return ((res == 0) ? -1 : 1);
 		}
 		else
 			return (0);
@@ -65,8 +66,11 @@ t_tetrimino	**read_input(char *input)
 	tmp = NULL;
 	while ((check = read_piece(fd, &tmp)) != 2 || (check == 2 && num == 0))
 	{
-		if (check == 1)
-			tetriminos[num] = tmp;
+		if ((check == 1 || check == -1))
+		{
+			if ((tetriminos[num] = tmp) && check == -1 && ++num)
+				break ;
+		}
 		else
 			free_exit(tmp, tetriminos, num, fd);
 		tmp = NULL;

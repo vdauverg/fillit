@@ -1,44 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 22:41:52 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/08 00:23:54 by hecampbe         ###   ########.fr       */
+/*   Updated: 2019/06/08 22:49:25 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int	*check_map(char **m, t_tetrimino *tetriminos, int ti, int *prev_start)
+int	check_map(char **m, t_tetrimino *tetriminos, int ti, t_pos *po)
 {
-	int				**co;
-	t_pos			po;
-	int				i;
+	int	i;
+	int	ret;
+	int	**co;
 
-	po.x = prev_start[0];
-	po.y = prev_start[1];
 	co = NULL;
 	co = coord_init(co);
-	first_block(m, &po, prev_start);
+	first_block(m, po);
 	i = 0;
 	while (i < 4)
 	{
-		if (!m[po.y] || (!m[po.y + 1] && !m[po.y][po.x]) || (!t(m, &po, co, i)))
+		if ((!m[po->y] || (!m[po->y + 1] && !m[po->y][po->x])) || (!t(m, po, co, i)))
 		{
-			(!m[po.y] || (!m[po.y + 1] && !m[po.y]
-				[po.x])) ? prev_start[2] = -1 :
-				(prev_start[2] = 0);
-			return (prev_start);
+			(!m[po->y] || (!m[po->y + 1] && !m[po->y][po->x])) ? ret = -1 : (ret = 0);
+			return (ret);
 		}
 		i++;
-		po = map_increment(tetriminos, po, i);
+		*po = map_increment(tetriminos, *po, i);
 	}
-	prev_start[2] = 1;
-	m = place_block(m, ti, co);
-	return (prev_start);
+	m = place_tet(m, ti, co);
+	return (1);
 }
 
 int	**t(char **map, t_pos *points, int **coordinates, int i)
@@ -73,4 +68,20 @@ int	**coord_init(int **coordinates)
 		i++;
 	}
 	return (coordinates);
+}
+
+char	**place_tet(char **map, int ti, int **coordinates)
+{
+	char	t_letter;
+	int		i;
+
+	t_letter = 'A';
+	t_letter = t_letter + ti;
+	i = 0;
+	while (i < 4)
+	{
+		map[coordinates[i][1]][coordinates[i][0]] = t_letter;
+		i++;
+	}
+	return (map);
 }

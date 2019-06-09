@@ -6,7 +6,7 @@
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:22:47 by vdauverg          #+#    #+#             */
-/*   Updated: 2019/06/07 16:58:15 by vdauverg         ###   ########.fr       */
+/*   Updated: 2019/06/09 04:27:33 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,26 +73,10 @@ void	ft_putstrx2(char **map)
 	}
 }
 
-char	**place_block(char **map, int ti, int **coordinates)
-{
-	char	t_letter;
-	int		i;
-
-	t_letter = 'A';
-	t_letter = t_letter + ti;
-	i = 0;
-	while (i < 4)
-	{
-		map[coordinates[i][1]][coordinates[i][0]] = t_letter;
-		i++;
-	}
-	return (map);
-}
-
 int		main(int argc, char **argv)
 {
-	int			*prev_start;
 	char		**map;
+	t_pos		points;
 	t_tetrimino **tetriminos;
 
 	if (argc == 2)
@@ -100,11 +84,10 @@ int		main(int argc, char **argv)
 		if (!(tetriminos = read_input(argv[1])))
 			safe_exit(0);
 		map = map_init(tetriminos);
-		prev_start = (int *)malloc(sizeof(int) * 3);
-		prev_start[0] = 0;
-		prev_start[1] = 0;
-		prev_start[2] = 1;
-		map = recursion(map, tetriminos, -1, prev_start);
+		points.x = 0;
+		points.y = 0;
+		points.rec = -1;
+		map = recursion(map, tetriminos, 0, points);
 		ft_putstrx2(map);
 	}
 	else
