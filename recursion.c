@@ -1,101 +1,104 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   recursion.c                                        :+:      :+:    :+:   */
+/*   recursion_3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdauverg <vdauverg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/02 16:47:40 by hecampbe          #+#    #+#             */
-/*   Updated: 2019/06/08 05:25:36 by vdauverg         ###   ########.fr       */
+/*   Created: 2019/06/08 18:17:27 by vdauverg          #+#    #+#             */
+/*   Updated: 2019/06/09 05:45:05 by vdauverg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-char	**recursion(char **map, t_tetrimino **tetriminos, int rec_num, int *prev_start)
+char		**recursion(char **map, t_tetrimino **tetriminos, int ti, t_pos points)
 {
-	char	**tmp_map;
-	int		size;
-	int		i;
-	int		start;
-	int		placed;
-	int		ti;
-
-	rec_num++;
-	start = 0;
-	size = ft_strlen(map[0]);
-	tmp_map = (char **)malloc(sizeof(char *) * (size + 1));
-	tmp_map[size] = NULL;
-	i = 0;
-	placed = 0;
-	ti = 0;
-	while (i < size)
-	{
-		tmp_map[i] = ft_strdup(map[i]);
-		i++;
-	}
-	while (tetriminos[ti])
-	{
-		prev_start[0] = start % size;
-		prev_start[1] = start / size;
-		if (tetriminos[ti]->placed == 0)
-		{
-			i = 0;
-			while (i == 0 || prev_start[2] == 0)
-			{
-				prev_start = check_map(tmp_map, tetriminos[ti], ti, prev_start);
-				prev_start[0]++;
-				i++;
-				start++;
-			}
-			if (prev_start[2] == 1)
-			{
-				tetriminos[ti]->placed = 1;
-				tmp_map = recursion(tmp_map, tetriminos, rec_num, prev_start);
-				if (prev_start[2] == -1)
-				{
-					i = -1;
-					while (tmp_map[++i])
-						ft_strcpy(tmp_map[i], map[i]);
-					tetriminos[ti]->placed = 0;
-					ti--;
-				}
-				else
-					placed++;
-			}
-			else
-				start = 0;
-		}
-		else
-			placed++;
-		ti++;
-	}
-	if (rec_num == 0 && placed == 0)
-	{
-		ft_putendl("INCREASING MAP!!!");
-		map = map_increase(map, size);
-		map = recursion(map, tetriminos, -1, prev_start);
-	}
-	else if (prev_start[2] == 1)
-	{
-		i = 0;
-		while (map[i])
-		{
-			ft_strcpy(map[i], tmp_map[i]);
-			i++;
-		}
-	}
-	i = 0;
-	map_del(tmp_map);
+	while (recurse(&map, tetriminos, ti, points) == -1)
+		map = map_increase(map);
 	return (map);
 }
 
-char		**map_increase(char **map, int map_size)
+
+int		recurse(char ***map, t_tetrimino **tetriminos, int ti, t_pos points)
 {
-	int		j;
+	int		ret;
+	t_pos	tmp_points;
+	char	**tmp_map;
+
+	tmp_map = map_dup(*map);
+	while(tetriminos[ti]->placed == 1)
+		ti++;
+	ret = try_place(&tmp_map, tetriminos, ti, points);
+	if (ret == 1 && tetriminos[ti + 1])
+	{
+		tetriminos[ti]->placed = 1;
+		tmp_points.x = 0;
+		tmp_points.y = 0;
+		ret = recurse(&tmp_map, tetriminos, 0, tmp_points);
+	}
+	if (tetriminos[ti + 1] && ret == -1 && tmp_map[points.y] && tmp_map[points.y][points.x])
+	{
+		tetriminos[ti]->placed = 0;
+		map_del(tmp_map);
+		tmp_map = map_dup(*map);
+		points.x++;
+		if (!tmp_map[points.y][points.x])
+		{
+			points.y++;
+			points.x = 0;
+		}
+		ret = recurse(&tmp_map, tetriminos, ti, points);
+	}
+	if (ret == 1)
+	{
+		map_del(*map);
+		*map = map_dup(tmp_map);
+	}
+	else
+		tetriminos[ti]->placed = 0;
+	map_del(tmp_map);
+	return (ret);
+}
+
+int		try_place(char ***map, t_tetrimino **tetriminos, int ti, t_pos points)
+{
+	int	ret;
+
+	ret = 0;
+	while (ret == 0)
+	{
+		ret = check_map(*map, tetriminos[ti], ti, &points);
+		points.x++;
+	}
+	return (ret);
+}
+
+char	**map_dup(char **map)
+{
 	int		i;
 	char	**new_map;
 
+	i = ft_strlen(map[0]);
+	new_map = (char **)malloc(sizeof(char *) * (i + 1));
+	new_map[i] = NULL;
+	i = 0;
+	while (map[i])
+	{
+		new_map[i] = ft_strdup(map[i]);
+		i++;
+	}
+	return (new_map);
+}
+
+char	**map_increase(char **map)
+{
+	int		j;
+	int		i;
+	int		map_size;
+	char	**new_map;
+
+	map_size = ft_strlen(map[0]);
 	j = 0;
 	i = map_size;
 	new_map = (char **)malloc(sizeof(char *) * (++map_size + 1));
